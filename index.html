@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My To Do List</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background-color: lightblue;
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="w-96 mx-auto mt-10 bg-white p-5 rounded shadow">
+
+        <h1 class="text-2xl font-bold text-center mb-5">
+            My To-Do List
+        </h1>
+
+        <div class="flex gap-2">
+            <input id="taskInput"
+                   type="text"
+                   placeholder="Enter task"
+                   class="border p-2 w-full rounded">
+
+            <button onclick="addTask()"
+                    class="bg-blue-500 text-white px-4 rounded">
+                Add
+            </button>
+        </div>
+
+        <ul id="taskList" class="mt-5">
+        </ul>
+
+    </div>
+
+
+    <script>
+
+        function addTask() {
+
+            var task = document.getElementById("taskInput").value;
+
+            if (task == "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            var li = document.createElement("li");
+
+            li.className = "flex justify-between items-center bg-gray-100 p-2 mb-2 rounded";
+
+            li.innerHTML =
+                "<span onclick='completeTask(this)' class='cursor-pointer'>" +
+                task +
+                "</span>" +
+                "<button onclick='deleteTask(this)' class='bg-red-500 text-white px-2 py-1 rounded'>Delete</button>";
+
+            document.getElementById("taskList").appendChild(li);
+
+            document.getElementById("taskInput").value = "";
+        }
+
+
+        function deleteTask(button) {
+            button.parentElement.remove();
+        }
+
+
+        function completeTask(task) {
+            task.classList.toggle("done");
+        }
+
+    </script>
+
+</body>
+</html>
